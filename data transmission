@@ -1,0 +1,24 @@
+import requests
+
+def send_data_to_server(temperature, humidity, pressure):
+    url = "http://your-server.com/api/weather"  # Replace with your actual server URL
+    payload = {
+        'temperature': temperature,
+        'humidity': humidity,
+        'pressure': pressure
+    }
+    
+    try:
+        response = requests.post(url, json=payload)
+        if response.status_code == 200:
+            print("Data sent successfully!")
+        else:
+            print(f"Failed to send data. Status code: {response.status_code}")
+    except Exception as e:
+        print(f"Error sending data: {e}")
+
+# Example usage
+if __name__ == "__main__":
+    data = collect_weather_data()
+    if data['temperature'] is not None:
+        send_data_to_server(data['temperature'], data['humidity'], data['pressure'])
